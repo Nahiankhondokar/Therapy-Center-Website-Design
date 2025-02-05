@@ -1,18 +1,19 @@
 @font-face {
-  font-family: 'dentco';
-  src:  url('fonts/dentcobabf.eot?qs6rs7');
-  src:  url('fonts/dentcobabf.eot?qs6rs7#iefix') format('embedded-opentype'),
-    url('fonts/dentcobabf.ttf?qs6rs7') format('truetype'),
-    url('fonts/dentcobabf.woff?qs6rs7') format('woff'),
-    url('fonts/dentcobabf.svg?qs6rs7#dentco') format('svg');
+  font-family: "dentco";
+  src: url("fonts/dentcobabf.eot?qs6rs7");
+  src: url("fonts/dentcobabf.eot?qs6rs7#iefix") format("embedded-opentype"),
+    url("fonts/dentcobabf.ttf?qs6rs7") format("truetype"),
+    url("fonts/dentcobabf.woff?qs6rs7") format("woff"),
+    url("fonts/dentcobabf.svg?qs6rs7#dentco") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'dentco' !important;
+  font-family: "dentco" !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -27,6 +28,9 @@
 
 .icon-behavior:before {
   content: "\e979";
+}
+.icon-youtube:before {
+  content: "\e167";
 }
 .icon-pills:before {
   content: "\e97a";
@@ -284,6 +288,7 @@
 .icon-health-care:before {
   content: "\e912";
 }
+/*  */
 .icon-clock3:before {
   content: "\e913";
 }
