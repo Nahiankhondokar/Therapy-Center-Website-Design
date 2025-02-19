@@ -22,3 +22,4 @@ jobs:
           protocol: ftp
           port: ${{ secrets.PORT }}
           local-dir: ./
+          timeout: 60000
