@@ -24,10 +24,3 @@ jobs:
           local-dir: ./
           server-dir: /public_html/ #
           timeout: 300000
-          log-level: verbose
-          exclude: |
-            **/.git*
-            **/.github*
-            **/node_modules*
-            **/storage/*
-            **/vendor/*
