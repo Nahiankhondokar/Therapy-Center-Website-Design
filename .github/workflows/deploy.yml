@@ -1,10 +1,27 @@
-- name: Deploy via SFTP
-  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-  with:
-    server: ${{ secrets.HOST }}
-    username: ${{ secrets.USERNAME }}
-    password: ${{ secrets.PASSWORD }}
-    protocol: sftp
-    port: 22
-    passive: true
-    timeout: 300000
+name: Deploy Laravel to cPanel via FTP
+
+on:
+  push:
+    branches:
+      - main # Change to your branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.SERVER }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          protocol: ftp
+          port: ${{ secrets.PORT }}
+          local-dir: ./
+          passive: true
+          timeout: 300000 # Increase timeout to 5 minutes
+          log-level: verbose
