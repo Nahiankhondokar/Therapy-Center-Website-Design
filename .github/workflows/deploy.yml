@@ -1,42 +1,30 @@
-name: Deploy Laravel App to cPanel
+name: Deploy Laravel to cPanel via FTP
 
 on:
   push:
     branches:
-      - main # Change this to your main branch if needed
+      - main # Change to your branch if needed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.CPANEL_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -H cstarbd.com >> ~/.ssh/known_hosts
-
-      - name: Test SSH Connection
-        run: ssh -i ~/.ssh/id_rsa speechth@cstarbd.com
-
-      - name: Deploy to cPanel
-        run: |
-          ssh speechth@cstarbd.com <<EOF
-            cd cstarbd.com  # Change to your Laravel project directory
-            git pull origin main  
-            composer install --no-dev --optimize-autoloader
-            php artisan migrate --force
-            php artisan config:clear
-            php artisan cache:clear
-            php artisan route:cache
-            php artisan view:cache
-            php artisan storage:link
-            chmod -R 775 storage bootstrap/cache
-            chown -R $USER:$USER storage bootstrap/cache
-          EOF
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.SERVER }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          protocol: ftp
+          port: ${{ secrets.PORT }}
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules*
+            **/storage/*
+            **/vendor/*
