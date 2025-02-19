@@ -13,17 +13,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check SSH Key
-        run: cat ~/.ssh/id_rsa
+      - name: Debug Secrets
+        run: |
+          if [ -z "${{ secrets.CPANEL_SSH_KEY }}" ]; then
+            echo "CPANEL_SSH_KEY is empty or not set!"
+            exit 1
+          else
+            echo "CPANEL_SSH_KEY is set."
+          fi
 
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{secrets.CPANEL_SSH_KEY}}" > ~/.ssh/id_rsa
+          echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval "$(ssh-agent -s)"
           ssh-add .ssh/id_rsa
           ssh-keyscan -H cstarbd.com >> .ssh/known_hosts
+
+      - name: Check SSH Key
+        run: cat ~/.ssh/id_rsa
 
       - name: Deploy to cPanel
         run: |
