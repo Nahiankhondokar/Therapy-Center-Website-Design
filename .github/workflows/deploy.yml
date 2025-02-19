@@ -18,10 +18,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.CPANEL_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ls -lah ~/.ssh  # Verify if id_rsa is created
-
-      - name: Check SSH Key
-        run: cat ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-keyscan -H cstarbd.com >> ~/.ssh/known_hosts
 
       - name: Test SSH Connection
         run: ssh -i ~/.ssh/id_rsa speechth@cstarbd.com
