@@ -30,7 +30,7 @@ jobs:
         run: |
           ssh speechth@cstarbd.com <<EOF
             cd cstarbd.com  # Change to your Laravel project directory
-            git pull origin main   # Pull latest code
+            git pull origin main  
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:clear
