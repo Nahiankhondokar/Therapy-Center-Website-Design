@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 🚀 Deploy to FTP Server
+      - name: Deploy to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.SERVER }}
@@ -25,3 +25,9 @@ jobs:
           server-dir: /public_html/ #
           timeout: 300000
           log-level: verbose
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules*
+            **/storage/*
+            **/vendor/*
