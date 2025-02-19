@@ -13,9 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check SSH Key
+        run: cat ~/.ssh/id_rsa
+
       - name: Setup SSH
         run: |
-          mkdir -p ~/.ssh/id_rsa
+          mkdir -p ~/.ssh
           echo "${{secrets.CPANEL_SSH_KEY}}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval "$(ssh-agent -s)"
