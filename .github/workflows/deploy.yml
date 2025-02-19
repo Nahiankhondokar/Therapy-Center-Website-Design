@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           protocol: ftp
-          port: 21
+          port: ${{ secrets.PORT }}
           local-dir: ./
           server-dir: /public_html/ #
           timeout: 300000
