@@ -15,12 +15,12 @@ jobs:
 
       - name: Setup SSH
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          mkdir -p .ssh
+          echo "${{ secrets.CPANEL_SSH_KEY }}" > .ssh/id_rsa
+          chmod 600 .ssh/id_rsa
           eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -H cstarbd.com >> ~/.ssh/known_hosts
+          ssh-add .ssh/id_rsa
+          ssh-keyscan -H cstarbd.com >> .ssh/known_hosts
 
       - name: Deploy to cPanel
         run: |
