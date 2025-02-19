@@ -23,6 +23,9 @@ jobs:
       - name: Check SSH Key
         run: cat ~/.ssh/id_rsa
 
+      - name: Test SSH Connection
+        run: ssh -i ~/.ssh/id_rsa speechth@cstarbd.com
+
       - name: Deploy to cPanel
         run: |
           ssh speechth@cstarbd.com <<EOF
