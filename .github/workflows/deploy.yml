@@ -13,15 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: 🚀 Deploy to FTP Server
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.SERVER }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           protocol: ftp
-          port: ${{ secrets.PORT }}
+          port: 21
           local-dir: ./
-          passive: true
+          server-dir: /public_html/ #
           timeout: 300000
           log-level: verbose
