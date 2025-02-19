@@ -23,5 +23,5 @@ jobs:
           port: ${{ secrets.PORT }}
           local-dir: ./
           server-dir: /public_html/ #
-          timeout: 30000
+          timeout: 300000
           log-level: verbose
