@@ -23,5 +23,5 @@ jobs:
           port: ${{ secrets.PORT }}
           local-dir: ./
           passive: true
-          timeout: 300000 # Increase timeout to 5 minutes
+          timeout: 300000
           log-level: verbose
