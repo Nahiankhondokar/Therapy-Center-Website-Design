@@ -4,7 +4,7 @@
     server: ${{ secrets.HOST }}
     username: ${{ secrets.USERNAME }}
     password: ${{ secrets.PASSWORD }}
-    protocol: sftp # Use SFTP instead of FTP
-    port: 22 # SFTP default port
+    protocol: sftp
+    port: 22
     passive: true
     timeout: 300000
