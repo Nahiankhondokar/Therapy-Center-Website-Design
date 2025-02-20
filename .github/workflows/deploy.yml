@@ -1,22 +1,28 @@
-name: Deploy to cPanel
+name: Deploy Static Website via FTP
+
 on:
   push:
     branches:
-      - main
-jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+      - main # Change this if you use a different branch
 
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to FTP Server
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          passive: true
+          protocol: ftp
+          port: 21
+          local-dir: ./ # Upload everything from repo
+          server-dir: /public_html/ # Adjust if needed
+          timeout: 600000 # Increase timeout (10 minutes)
+          passive: true # Enable passive mode to avoid firewall issues
+          log-level: verbose # Show detailed logs
