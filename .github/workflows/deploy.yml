@@ -12,6 +12,7 @@ jobs:
         with:
           fetch-depth: 2
 
+      # Deploy to cpanel
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
