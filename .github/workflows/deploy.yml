@@ -13,13 +13,24 @@ jobs:
       - name: 🚀 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🚀 Deploy to FTP Server
-        uses: SamKirkland/FTP-Deploy-Action@v3
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: ${{ secrets.FTP_PORT }}
-          local-dir: ./ # Upload everything from repo
-          server-dir: /public_html/ # Adjust if needed
+      - name: Debug FTP Connection
+        run: |
+          sudo apt-get install -y lftp
+          lftp -e "
+            set ftp:ssl-allow no;
+            open ${{ secrets.FTP_SERVER }};
+            user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
+            ls;
+            bye;
+          "
+
+      # - name: 🚀 Deploy to FTP Server
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     protocol: ftp
+      #     port: ${{ secrets.FTP_PORT }}
+      #     local-dir: ./ # Upload everything from repo
+      #     server-dir: /public_html/ # Adjust if needed
