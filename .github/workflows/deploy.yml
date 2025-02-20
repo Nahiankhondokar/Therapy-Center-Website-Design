@@ -1,26 +1,21 @@
-name: Deploy Laravel to cPanel via FTP
-
+name: Deploy to cPanel
 on:
   push:
     branches:
-      - main # Change to your branch if needed
-
+      - main
 jobs:
-  deploy:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Deploy to FTP Server
+      - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.SERVER }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          protocol: ftp
-          port: ${{ secrets.PORT }}
-          local-dir: ./
-          server-dir: /public_html/ #
-          timeout: 300000
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
