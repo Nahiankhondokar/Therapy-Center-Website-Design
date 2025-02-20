@@ -23,6 +23,3 @@ jobs:
           port: 21
           local-dir: ./ # Upload everything from repo
           server-dir: /public_html/ # Adjust if needed
-          timeout: 600000 # Increase timeout (10 minutes)
-          passive: true # Enable passive mode to avoid firewall issues
-          log-level: verbose # Show detailed logs
